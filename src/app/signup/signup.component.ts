@@ -37,7 +37,38 @@ export class SignupComponent implements OnInit {
   }
 
   validateSubmit(){
-    // need to impl here
+    if(this.signupForm.controls['password'].value != this.signupForm.controls['confirmPassword'].value){
+      return true;
+    }else{
+      return false;
+    }
+  }
+
+  handleSubmit(){
+    this.ngxUiLoaderService.start();
+    var formData = this.signupForm.value;
+    var data = {
+      name: formData.name,
+      email: formData.email,
+      contactNbr: formData.contactNbr,
+      password: formData.password
+    }
+
+    this.userService.signUp(data).subscribe((response : any) => {
+      this.ngxUiLoaderService.stop();
+      this.dialogRef.close();
+      this.responseMessage = response?.message;
+      this.snackbarService.openSnackBar(this.responseMessage,"");
+      this.router.navigate(['/']);
+    },(error) => {
+      this.ngxUiLoaderService.stop();
+      if(error.error?.message){
+        this.responseMessage = error.error?.message;
+      }else{
+        this.responseMessage = GlobalConstants.genericError;
+      }
+    this.snackbarService.openSnackBar(this.responseMessage,GlobalConstants.error); 
+    })
     
   }
 
