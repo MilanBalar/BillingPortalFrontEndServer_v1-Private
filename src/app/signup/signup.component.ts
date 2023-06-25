@@ -28,9 +28,10 @@ export class SignupComponent implements OnInit {
 
   ngOnInit(): void {
     this.signupForm = this.formBuilder.group({
+      userName:[null,[Validators.required, Validators.pattern(GlobalConstants.userNameRagex)]],
       name:[null,[Validators.required, Validators.pattern(GlobalConstants.nameRagex)]],
       email:[null,[Validators.required, Validators.pattern(GlobalConstants.emailRagex)]],
-      contactNbr:[null,[Validators.required, Validators.pattern(GlobalConstants.contactNbrRagex)]],
+      phone:[null,[Validators.required, Validators.pattern(GlobalConstants.contactNbrRagex)]],
       password:[null, [Validators.required]],
       confirmPassword:[null, [Validators.required]],
     })
@@ -48,9 +49,10 @@ export class SignupComponent implements OnInit {
     this.ngxUiLoaderService.start();
     var formData = this.signupForm.value;
     var data = {
+      userName: formData.userName,
       name: formData.name,
       email: formData.email,
-      contactNbr: formData.contactNbr,
+      phone: formData.phone,
       password: formData.password
     }
 

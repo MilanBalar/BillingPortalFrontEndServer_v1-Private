@@ -12,6 +12,15 @@
     <form [formGroup]="signupForm">
         <div fxFlex fxLayout="column">
             <mat-form-field appearance="standard" fxFlex>
+                <mat-label>User Name</mat-label>
+                <input matInput formControlName="userName" required>
+                <mat-error *ngIf="signupForm.controls.userName.touched && signupForm.controls.userName.invalid">
+                    <span *ngIf="signupForm.controls.userName.errors.required">This field is mandatory.</span>
+                    <span *ngIf="signupForm.controls.userName.errors.pattern">This field is invalid.</span>
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="standard" fxFlex>
                 <mat-label>Name</mat-label>
                 <input matInput formControlName="name" required>
                 <mat-error *ngIf="signupForm.controls.name.touched && signupForm.controls.name.invalid">
@@ -22,10 +31,10 @@
 
             <mat-form-field appearance="standard" fxFlex>
                 <mat-label>Contact Number</mat-label>
-                <input matInput formControlName="contactNbr" required>
-                <mat-error *ngIf="signupForm.controls.contactNbr.touched && signupForm.controls.contactNbr.invalid">
-                    <span *ngIf="signupForm.controls.contactNbr.errors.required">This field is mandatory.</span>
-                    <span *ngIf="signupForm.controls.contactNbr.errors.pattern">This field is invalid.</span>
+                <input matInput formControlName="phone" required>
+                <mat-error *ngIf="signupForm.controls.phone.touched && signupForm.controls.phone.invalid">
+                    <span *ngIf="signupForm.controls.phone.errors.required">This field is mandatory.</span>
+                    <span *ngIf="signupForm.controls.phone.errors.pattern">This field is invalid.</span>
                 </mat-error>
             </mat-form-field>
 
