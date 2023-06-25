@@ -13,14 +13,14 @@ export class SnackbarService {
       this.snackBar.open(message,'',{
         horizontalPosition:'center',
         verticalPosition:'top',
-        duration:2000,
-        panelClass:['black-snackbar']
+        duration:4000,
+        panelClass:['red-snackbar']
       })
     }else{
       this.snackBar.open(message,'',{
         horizontalPosition:'center',
         verticalPosition:'top',
-        duration:2000,
+        duration:4000,
         panelClass:['green-snackbar']
       })
     }
