@@ -3,59 +3,40 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from '../services/user.service';
 import { SnackbarService } from '../services/snackbar.service';
-import { MatDialogRef } from '@angular/material/dialog';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
+import { MatDialogRef } from '@angular/material/dialog';
 import { GlobalConstants } from '../shared/global-constants';
 
 @Component({
-  selector: 'app-signup',
-  templateUrl: './signup.component.html',
-  styleUrls: ['./signup.component.scss']
+  selector: 'app-forgot-password',
+  templateUrl: './forgot-password.component.html',
+  styleUrls: ['./forgot-password.component.scss']
 })
-export class SignupComponent implements OnInit {
-  password = true;
-  confirmPassword = true;
-  signupForm: any = FormGroup;
+export class ForgotPasswordComponent implements OnInit {
+  forgotPasswordForm: any = FormGroup;
   responseMessage: any;
 
   constructor(private formBuilder: FormBuilder,
     private router: Router,
     private userService: UserService,
     private snackbarService: SnackbarService,
-    public dialogRef: MatDialogRef<SignupComponent>,
+    public dialogRef: MatDialogRef<ForgotPasswordComponent>,
     private ngxUiLoaderService: NgxUiLoaderService
   ) { }
 
   ngOnInit(): void {
-    this.signupForm = this.formBuilder.group({
-      userName: [null, [Validators.required, Validators.pattern(GlobalConstants.userNameRagex)]],
-      name: [null, [Validators.required, Validators.pattern(GlobalConstants.nameRagex)]],
+    this.forgotPasswordForm = this.formBuilder.group({
       email: [null, [Validators.required, Validators.pattern(GlobalConstants.emailRagex)]],
-      phone: [null, [Validators.required, Validators.pattern(GlobalConstants.contactNbrRagex)]],
-      password: [null, [Validators.required]],
-      confirmPassword: [null, [Validators.required]],
     })
-  }
-
-  validateSubmit() {
-    if (this.signupForm.controls['password'].value != this.signupForm.controls['confirmPassword'].value) {
-      return true;
-    } else {
-      return false;
-    }
   }
 
   handleSubmit() {
     this.ngxUiLoaderService.start();
-    var formData = this.signupForm.value;
+    var formData = this.forgotPasswordForm.value;
     var data = {
-      userName: formData.userName,
-      name: formData.name,
       email: formData.email,
-      phone: formData.phone,
-      password: formData.password
     }
-    this.userService.signUp(data).subscribe((response: any) => {
+    this.userService.forgotPassword(data).subscribe((response: any) => {
       this.ngxUiLoaderService.stop();
       this.dialogRef.close();
       this.responseMessage = response?.message;
