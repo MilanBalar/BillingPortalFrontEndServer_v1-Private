@@ -22,4 +22,10 @@ export class UserService {
     })
   }
 
+  loginUser(data: any) {
+    return this.httpClient.post(this.url + "/generateToken", data, {
+      headers: new HttpHeaders().set('Content-Type', 'application/json')
+    })
+  }
+
 }
