@@ -13,19 +13,23 @@ export class UserService {
   signUp(data: any) {
     return this.httpClient.post(this.url + "/user/", data, {
       headers: new HttpHeaders().set('Content-Type', 'application/json')
-    })
+    });
   }
 
   forgotPassword(data: any) {
     return this.httpClient.post(this.url + "/user/forgot-password", data, {
       headers: new HttpHeaders().set('Content-Type', 'application/json')
-    })
+    });
   }
 
   loginUser(data: any) {
     return this.httpClient.post(this.url + "/generateToken", data, {
       headers: new HttpHeaders().set('Content-Type', 'application/json')
-    })
+    });
+  }
+
+  checkToken() {
+    return this.httpClient.get(this.url + "/user/checkToken");
   }
 
 }
